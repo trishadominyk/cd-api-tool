@@ -52,7 +52,7 @@
                             Non-API
                         </div>
                         <div class="card-body p-5">
-                            <form id="payment-details" class="pb-5">
+                            <form id="nonapi-payment-details" class="pb-5">
                                 <div class="form-group mb-4">
                                     <label for="type">Payment Type</label>
                                     <select type="text" class="form-select" id="type" name="type">
@@ -63,7 +63,7 @@
                                 </div>
 
                                 <div class="form-group mb-4">
-                                    <label for="type">Payment orientation</label>
+                                    <label for="orientation">Payment orientation</label>
                                     <select type="text" class="form-select" id="orientation" name="orientation">
                                         <?php foreach($paymentOrientations as $paymentOrientation){
                                             echo '<option value="' . $paymentOrientation . '">' . $paymentOrientation . '</option>';
@@ -86,17 +86,12 @@
                                 ?>
 
                                 <div class="form-group mb-4">
-                                    <label for="funding_source_name" class="mb-1">Funding source name</label>
-                                    <input type="text" class="form-control" id="funding_source_name" name="funding_source_name">
-                                </div>
-
-                                <div class="form-group mb-4">
-                                    <button type="button" class="btn btn-primary form-control" id="submit-btn">Submit</button>
+                                    <button type="button" class="btn btn-primary form-control" id="nonapi-submit-btn">Submit</button>
                                 </div>
                             </form>
 
                             <h5>URL:</h5>
-                            <h2 id="nonAPIOutput" class="text-center"></h2>
+                            <h4 id="nonAPIOutput" class="text-center"></h4>
                         </div>
                     </div>
                 </div>
@@ -107,7 +102,16 @@
                                 Custom API
                             </div>
                             <div class="card-body p-5">
-                                <form id="payment-details" class="pb-5">
+                                <form id="customapi-payment-details" class="pb-5" action="#">
+                                    <div class="form-group mb-4">
+                                        <label for="type">Payment Type</label>
+                                        <select type="text" class="form-select" id="type" name="type">
+                                            <?php foreach($paymentTypes as $paymentType){
+                                                echo '<option value="' . strtolower(str_replace(' ', '-', $paymentType)) . '">' . $paymentType . '</option>';
+                                            }?>
+                                        </select>
+                                    </div>
+
                                     <?php 
                                         $template = '';
                                         foreach($customApiData as $key => $value){
@@ -120,10 +124,14 @@
                                         }
                                         echo $template;
                                     ?>
+
+                                    <div class="form-group mb-4">
+                                        <button type="button" class="btn btn-primary form-control" id="customapi-submit-btn">Submit</button>
+                                    </div>
                                 </form>
 
                                 <h5>URL:</h5>
-                                <h1 id="outputText" class="text-center"></h1>
+                                <h4 id="customApiOutput" class="text-center"></h4>
                             </div>
                     </div>
                 </div>
