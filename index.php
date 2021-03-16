@@ -28,8 +28,8 @@
                 'currency' => 'USD',
                 'return_url' => 'https://dev1.currentdesk.com/FundTransfer/Confirmation',
                 'notification_url' => 'https://uat.currentcashier.com/v1/callback/12345',
-                'orientation' => 'deposit', //deposits as default, as withdrawals are not yet integrated with custom API
-                'email' => 'test@test.com',
+                // 'orientation' => 'deposit', //deposits as default, as withdrawals are not yet integrated with custom API
+                'email_address' => 'test@test.com',
                 'last_name' => 'Doe',
                 'account_id' => '100111',
                 'first_name' => 'John',
@@ -40,7 +40,7 @@
                 'country_of_citizenship' => 'PH'
             ];
 
-            $paymentTypes = ['Fasapay', 'Perfect Money'];
+            $paymentTypes = ['Perfect Money', 'Fasapay'];
 
             $paymentOrientations = ['deposit', 'withdraw'];
         ?>
@@ -52,7 +52,7 @@
                             Non-API
                         </div>
                         <div class="card-body p-5">
-                            <form id="nonapi-payment-details" class="pb-5">
+                            <form id="nonapi-payment-details" class="payment-form pb-5">
                                 <div class="form-group mb-4">
                                     <label for="type">Payment Type</label>
                                     <select type="text" class="form-select" id="type" name="type">
@@ -84,14 +84,10 @@
 
                                     echo $template;
                                 ?>
-
-                                <div class="form-group mb-4">
-                                    <button type="button" class="btn btn-primary form-control" id="nonapi-submit-btn">Submit</button>
-                                </div>
                             </form>
 
                             <h5>URL:</h5>
-                            <h4 id="nonAPIOutput" class="text-center"></h4>
+                            <a id="nonAPILink" target="_blank" href=""><p id="nonAPIOutput" class="text-center"></p></a>
                         </div>
                     </div>
                 </div>
@@ -102,7 +98,7 @@
                                 Custom API
                             </div>
                             <div class="card-body p-5">
-                                <form id="customapi-payment-details" class="pb-5" action="#">
+                                <form id="customapi-payment-details" class="payment-form pb-5" action="#" method="POST">
                                     <div class="form-group mb-4">
                                         <label for="type">Payment Type</label>
                                         <select type="text" class="form-select" id="type" name="type">
@@ -111,6 +107,15 @@
                                             }?>
                                         </select>
                                     </div>
+
+                                    <div class="form-group mb-4">
+                                    <label for="orientation">Payment orientation</label>
+                                    <select type="text" class="form-select" id="orientation" name="orientation">
+                                        <?php foreach($paymentOrientations as $paymentOrientation){
+                                            echo '<option value="' . $paymentOrientation . '">' . $paymentOrientation . '</option>';
+                                        }?>
+                                    </select>
+                                </div>
 
                                     <?php 
                                         $template = '';
@@ -126,12 +131,12 @@
                                     ?>
 
                                     <div class="form-group mb-4">
-                                        <button type="button" class="btn btn-primary form-control" id="customapi-submit-btn">Submit</button>
+                                        <input type="submit" class="btn btn-primary form-control" id="customapi-submit-btn">
                                     </div>
                                 </form>
 
                                 <h5>URL:</h5>
-                                <h4 id="customApiOutput" class="text-center"></h4>
+                                <p id="customApiOutput" class="text-center"></p>
                             </div>
                     </div>
                 </div>
